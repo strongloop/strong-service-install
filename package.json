@@ -31,18 +31,10 @@
     "lodash": "^2.4.1",
     "minimist": "^0.2.0",
     "mkdirp": "^0.5.0",
-    "strong-service-upstart": "git://github.com/strongloop/strong-service-upstart",
+    "strong-service-upstart": "strongloop/strong-service-upstart",
     "uid-number": "0.0.5",
     "which": "^1.0.5"
   },
-  "bundleDependencies": [
-    "strong-service-upstart",
-    "lodash",
-    "async",
-    "minimist",
-    "mkdirp",
-    "which"
-  ],
   "bin": {
     "sl-svc-install": "bin/sl-svc-install.js"
   },
