@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 
 var upstartMaker = require('strong-service-upstart');
+var uidNumber = require('uid-number');
 var mkdirp = require('mkdirp');
 var which = require('which');
 var async = require('async');
@@ -11,6 +12,7 @@ var async = require('async');
 module.exports = exports = install;
 exports.writeFile = fs.writeFile;
 exports.mkdirp = mkdirp;
+exports.chown = fs.chown;
 
 function install(opts, cb) {
   var steps = [
@@ -21,7 +23,8 @@ function install(opts, cb) {
     checkExistingJob,
     checkExistingUser,
     generateJob,
-    ensureDir,
+    ensureJobFileDir,
+    ensureWorkingDir,
     writeJob,
   ];
   async.applyEachSeries(steps, opts, function(err) {
@@ -55,11 +58,31 @@ function checkExistingJob(opts, next) {
   });
 }
 
-function ensureDir(opts, next) {
+function ensureJobFileDir(opts, cb) {
   var dir = path.dirname(opts.jobFile);
   exports.mkdirp(dir, {}, function(err, made) {
-    console.log(arguments);
-    next(err);
+    if (!err)
+      console.log('created %s...', made);
+    cb(err);
+  });
+}
+
+function ensureWorkingDir(opts, cb) {
+  if (!opts.cwd)
+    return setImmediate(cb);
+  exports.mkdirp(opts.cwd, {}, function(err, made) {
+    if (!err) {
+      console.log('created %s...', made);
+      uidNumber(opts.user, opts.group, function(err, uid, gid) {
+        if (err)
+          return cb(err);
+        exports.chown(made, uid, gid, function(err) {
+          cb(err);
+        });
+      });
+    } else {
+      cb(err);
+    }
   });
 }
 
@@ -153,5 +176,10 @@ function fakeMkdirp(path, opts, cb) {
 
 function fakeWriteFile(path, data, opts, cb) {
   console.log('fake fs.writeFile(%j, <data>, %j)', path, cb ? opts : {});
+  setImmediate(cb);
+}
+
+function fakeChown(path, uid, gid, cb) {
+  console.log('fake fs.chown(%j, %j, %j)', path, uid, gid);
   setImmediate(cb);
 }

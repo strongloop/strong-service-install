@@ -29,6 +29,7 @@
     "minimist": "^0.2.0",
     "mkdirp": "^0.5.0",
     "strong-service-upstart": "git://github.com/strongloop/strong-service-upstart",
+    "uid-number": "0.0.5",
     "which": "^1.0.5"
   },
   "bundleDependencies": [
