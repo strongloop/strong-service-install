@@ -15,7 +15,10 @@
     "service"
   ],
   "author": "Ryan Graham <ryan@strongloop.com>",
-  "license": "MIT",
+  "license": {
+    "name": "Dual Artistic/StrongLoop",
+    "url": "https://github.com/strongloop/strong-service-install/blob/master/LICENSE.md"
+  },
   "bugs": {
     "url": "https://github.com/strongloop/strong-service-install/issues"
   },
