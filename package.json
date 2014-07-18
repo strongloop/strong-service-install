@@ -1,0 +1,48 @@
+{
+  "name": "strong-service-install",
+  "version": "0.0.0",
+  "description": "Install a module as an OS service",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap --timeout 180 test/test-*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strongloop/strong-service-install"
+  },
+  "keywords": [
+    "upstart",
+    "service"
+  ],
+  "author": "Ryan Graham <ryan@strongloop.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strongloop/strong-service-install/issues"
+  },
+  "homepage": "https://github.com/strongloop/strong-service-install",
+  "devDependencies": {
+    "tap": "git://github.com/strongloop-forks/node-tap#production"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "lodash": "^2.4.1",
+    "minimist": "^0.2.0",
+    "mkdirp": "^0.5.0",
+    "strong-service-upstart": "git://github.com/strongloop/strong-service-upstart",
+    "which": "^1.0.5"
+  },
+  "bundleDependencies": [
+    "strong-service-upstart",
+    "lodash",
+    "async",
+    "minimist",
+    "mkdirp",
+    "which"
+  ],
+  "bin": {
+    "sl-svc-install": "bin/sl-svc-install.js"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
