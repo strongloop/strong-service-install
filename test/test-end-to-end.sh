@@ -33,9 +33,9 @@ git clone --quiet git@github.com:strongloop/loopback-example-app.git
   git commit -m "listen on port 8888" &&
   git push --quiet http://localhost:7777/repo HEAD)
 
-echo "# waiting for strong-deploy to deploy our app..."
+echo "# waiting for strong-pm to deploy our app..."
 sleep 5
-vagrant ssh -- sudo cat /var/log/upstart/sl-deploy.log
+vagrant ssh -- sudo cat /var/log/upstart/sl-pm.log
 
 echo "# polling...."
 sleep 5

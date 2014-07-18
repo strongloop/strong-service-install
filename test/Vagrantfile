@@ -29,15 +29,15 @@ $test = <<SCRIPT
     ($* && echo "ok # $*") || (echo "not ok # $*" >&2)
     ## ($* > /dev/null && echo "ok # $*") || (echo "not ok # $*" >&2)
   }
-  report npm install -g strongloop/strong-deploy strongloop/strong-supervisor
+  report npm install -g strongloop/strong-pm strongloop/strong-supervisor
   report npm install -g sl-service-install.tgz
-  report sudo stop sl-deploy
-  report sudo sl-svc-install --user `id -un` --name sl-deploy --force --cwd $HOME -- sl-deploy --listen 7777
-  report test -f /etc/init/sl-deploy.conf
-  report sudo start sl-deploy
-  report sudo status sl-deploy
+  report sudo stop sl-pm
+  report sudo sl-svc-install --user `id -un` --name sl-pm --force --cwd $HOME -- sl-pm --listen 7777
+  report test -f /etc/init/sl-pm.conf
+  report sudo start sl-pm
+  report sudo status sl-pm
   sleep 1
-  sudo tail -20 /var/log/upstart/sl-deploy.log
+  sudo tail -20 /var/log/upstart/sl-pm.log
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Install modules for tests
   config.vm.provision "shell", inline: $test, privileged: false
 
-  # expose strong-deploy's port
+  # expose strong-pm's port
   config.vm.network "forwarded_port", guest: 7777, host: 7777
   # expose sample app's port
   config.vm.network "forwarded_port", guest: 8888, host: 8888
