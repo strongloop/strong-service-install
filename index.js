@@ -71,7 +71,7 @@ function ensureWorkingDir(opts, cb) {
   if (!opts.cwd)
     return setImmediate(cb);
   exports.mkdirp(opts.cwd, {}, function(err, made) {
-    if (!err) {
+    if (!err && made) {
       console.log('created %s...', made);
       uidNumber(opts.user, opts.group, function(err, uid, gid) {
         if (err)
