@@ -87,7 +87,9 @@ function ensureWorkingDir(opts, cb) {
 }
 
 function checkExistingUser(opts, next) {
-  console.log('TODO: check users');
+  // XXX(rmg): we should do this check and create if they don't exist
+  console.log('Please ensure the user "%s" and group "%s" exists',
+              opts.user, opts.group);
   setImmediate(next);
 }
 
