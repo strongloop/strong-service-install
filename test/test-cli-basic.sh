@@ -7,7 +7,7 @@ CMD="node ../bin/sl-svc-install.js"
 # command given, name should be derived, should exit cleanly
 assert 0 $CMD --dry-run -- ../bin/sl-svc-install.js
 
-TMP=`mktemp -d -t sl-svc-install`
+TMP=`mktemp -d -t sl-svc-installXXXXXX`
 assert 1 test -d $TMP/etc/init
 assert 1 test -d $TMP/home
 assert 0 $CMD --cwd $TMP/home --jobFile $TMP/etc/init/test.conf -- test
