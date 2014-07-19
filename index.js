@@ -11,9 +11,13 @@ var async = require('async');
 
 module.exports = exports = install;
 exports.writeFile = fs.writeFile;
-exports.mkdirp = mkdirp;
+exports.mkdirp = mkdirp; // could use a comment as to why, and it isn't really exported, is it? this is just an alias to give the fake one a name diff from real one?
 exports.chown = fs.chown;
 
+// I know this is an internal module, but still, this could use a comment
+// describing the valid keys in opts, and what install() should have done
+// when its complete. knowing the inputs and outputs, code would probably be
+// easy to read.
 function install(opts, cb) {
   var steps = [
     dryRunCheck,
@@ -35,6 +39,7 @@ function install(opts, cb) {
   });
 }
 
+// please reorder functions in same order as steps
 function dryRunCheck(opts, next) {
   if (opts['dry-run'] || opts.dry_run || opts.n) {
     console.log('dry-run mode');
@@ -105,9 +110,13 @@ function writeJob(opts, next) {
   exports.writeFile(opts.jobFile, opts.generatedJob, {}, next);
 }
 
+// this could use a comment about what it is trying to do, I think its trying
+// to find if command is in path, or if is name of .js file, but its
+// particularly hard to know because in this function, I don't know what inputs
+// or outputs are, opts.command came from outside this module, I think,
 function resolveCommand(opts, next) {
   if (!Array.isArray(opts.command)) {
-    opts.command = opts.command.split(/\s+/);
+    opts.command = opts.command.split(/\s+/); // having trouble seeing where command comes from, but if there are spaces in any args this will go poorly
   }
   var local = path.resolve(opts.command[0]);
   fs.exists(local, function(exists) {
@@ -143,6 +152,8 @@ function normalizeOptions(opts, next) {
     opts.name = path.basename(opts.script[0]);
   }
 
+  // if sl-pm-install doesn't actually depend on this, maybe get rid of it, use
+  // use substack's shellparse, or something.
   if (Array.isArray(opts.script)) {
     opts.script = opts.script.join(' ');
   }
