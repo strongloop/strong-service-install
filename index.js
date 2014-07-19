@@ -45,7 +45,6 @@ function dryRunCheck(opts, next) {
 }
 
 function checkExistingJob(opts, next) {
-  console.log('checking existing');
   fs.exists(opts.jobFile, function(exists) {
     if (exists) {
       if (opts.force) {
