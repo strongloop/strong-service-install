@@ -154,7 +154,7 @@ function generateJob(opts, next) {
 function ensureJobFileDir(opts, cb) {
   var dir = path.dirname(opts.jobFile);
   opts.mkdirp(dir, {}, function(err, made) {
-    if (!err)
+    if (!err && made)
       console.log('created %s...', made);
     cb(err);
   });
