@@ -28,8 +28,8 @@ function install(opts, cb) {
   async.applyEachSeries(steps, opts, function(err) {
     if (err)
       return cb(err);
-    else
-      return cb(null, util.format('%s (%s)', opts.name, opts.jobFile));
+    console.log('Service %s installed (%s)', opts.name, opts.jobFile);
+    cb(null, util.format('%s (%s)', opts.name, opts.jobFile));
   });
 
   function logCall(fn) {
