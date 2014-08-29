@@ -45,11 +45,13 @@ function install(opts, cb) {
 
 function dryRunCheck(opts, next) {
   if (opts['dry-run'] || opts.dryRun || opts.n) {
+    opts.dryRun = true;
     console.log('dry-run mode');
     opts.writeFile = opts.writeFile || fakeWriteFile;
     opts.mkdirp = opts.mkdirp || fakeMkdirp;
     opts.chown = opts.chown || fakeChown;
   } else {
+    opts.dryRun = false;
     opts.writeFile = opts.writeFile || fs.writeFile;
     opts.mkdirp = opts.mkdirp || mkdirp;
     opts.chown = opts.chown || fs.chown;
@@ -135,6 +137,9 @@ function checkExistingJob(opts, next) {
     if (exists) {
       if (opts.force) {
         console.log('Warning: overwriting file "%s"', opts.jobFile);
+      } else if (opts.dryRun) {
+        console.log('Warning: install would fail because %j already exists',
+                    opts.jobFile);
       } else {
         return next(new Error('Job file "' + opts.jobFile + '" exists. Move it or re-run with --force to overwrite.'));
       }
