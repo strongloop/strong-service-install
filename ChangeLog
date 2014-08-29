@@ -1,19 +1,23 @@
-2014-07-21, Version 0.1.2
+2014-08-29, Version v0.1.3
+==========================
+
+ * Don't fail on --dry-run (Ryan Graham)
+
+
+2014-07-21, Version v0.1.2
+==========================
 
 
 
-2014-07-21, Version 0.1.1
+2014-07-21, Version v0.1.1
+==========================
 
-* fix: log when/what service is installed (Ryan Graham)
+ * fix: log when/what service is installed (Ryan Graham)
 
-* fix: skip notice when no directory is created (Ryan Graham)
+ * fix: skip notice when no directory is created (Ryan Graham)
 
 
-2014-07-20, Version 0.1.0
+2014-07-21, Version v0.1.0
+==========================
 
-* Basic docs and CLI usage (Ryan Graham)
-
-* Initial version (Ryan Graham)
-
-* Initial commit (Ryan Graham)
-
+ * First release!
