@@ -66,6 +66,17 @@ function optionsPrecheck(opts, next) {
     errors.push('Missing command or name');
   }
 
+  // TODO: select sub-installer here when there's more than just Upstart
+  if (opts.upstart) {
+    opts.version = opts.upstart;
+    delete opts.upstart;
+  }
+
+  if (opts.execPath) {
+    opts.execpath = opts.execPath;
+    delete opts.execPath;
+  }
+
   if (errors.length > 0)
     return setImmediate(next, new Error(errors.join(', ')));
   else
@@ -89,9 +100,9 @@ function resolveCommand(opts, next) {
   which(opts.command[0], function(err, fromPath) {
     if (err)
       return maybeLocal();
-    if (!opts.execPath) {
+    if (!opts.execpath) {
       // exec + script = command
-      opts.execPath = fromPath;
+      opts.execpath = fromPath;
       opts.script = opts.command.slice(1);
     }
     return next();
@@ -102,7 +113,7 @@ function resolveCommand(opts, next) {
     fs.exists(local, function(exists) {
       if (exists) {
         // exec + script = node + expanded path + args
-        opts.execPath = opts.execPath || process.execPath;
+        opts.execpath = opts.execpath || process.execPath;
         opts.script = [local].concat(opts.command.slice(1));
       } else {
         return next(new Error('Could not resolve command:', opts.command));
@@ -113,7 +124,7 @@ function resolveCommand(opts, next) {
 
 function normalizeOptions(opts, next) {
   if (!opts.name) {
-    opts.name = path.basename(opts.script[0] || opts.execPath);
+    opts.name = path.basename(opts.script[0] || opts.execpath);
   }
 
   // strong-service-upstart requires a string for script

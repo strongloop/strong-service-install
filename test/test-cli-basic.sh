@@ -22,4 +22,9 @@ assert_exit 0 $CMD --cwd $TMP/home --jobFile $TMP/etc/init/test.conf --dry-run -
 # no arguments is an error, exit code 1
 assert_exit 1 $CMD
 
+assert_exit 0 $CMD --cwd $TMP/home --jobFile $TMP/etc/init/test-0.6.conf --upstart 0.6 -- cat
+assert_file $TMP/etc/init/test-0.6.conf "exec su -m -s"
+assert_exit 0 $CMD --cwd $TMP/home --jobFile $TMP/etc/init/test-1.4.conf --upstart 1.4 -- cat
+assert_file $TMP/etc/init/test-1.4.conf "exec $(which cat)"
+
 assert_report
