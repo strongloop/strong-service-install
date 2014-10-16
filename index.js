@@ -66,6 +66,12 @@ function optionsPrecheck(opts, next) {
     errors.push('Missing command or name');
   }
 
+  // TODO: select sub-installer here when there's more than just Upstart
+  if (opts.upstart) {
+    opts.version = opts.upstart;
+    delete opts.upstart;
+  }
+
   if (opts.execPath) {
     opts.execpath = opts.execPath;
     delete opts.execPath;

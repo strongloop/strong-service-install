@@ -31,5 +31,5 @@ function usage($0, p) {
   p('  --group          Group to run service as.');
   p('  --jobFile        Upstart file to create (default /etc/init/<name>.conf)');
   p('  --cwd            Directory to run the service from.');
-  p('  --version        Version of Upstart to assume: 0.6 or 1.4 (default)');
+  p('  --upstart        Version of Upstart to assume: 0.6 or 1.4 (default)');
 }
