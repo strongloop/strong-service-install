@@ -46,5 +46,5 @@ Options:
   --group          Group to run service as.
   --jobFile        Upstart file to create (default /etc/init/<name>.conf)
   --cwd            Directory to run the service from.
-  --version        Version of Upstart to assume: 0.6 or 1.4 (default)
+  --upstart        Version of Upstart to assume: 0.6 or 1.4 (default)
 ```
