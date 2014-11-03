@@ -1,3 +1,9 @@
+2014-11-03, Version 1.0.1
+=========================
+
+ * doc: replace --version with --upstart (Ryan Graham)
+
+
 2014-10-16, Version 1.0.0
 =========================
 
