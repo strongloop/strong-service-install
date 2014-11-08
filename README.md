@@ -41,10 +41,11 @@ usage: sl-svc-install [options] -- <app and args>
 
 Options:
   -h,--help        Print this message and exit.
-  --name           Name to use for service (default derived from app)
-  --user           User to run service as.
-  --group          Group to run service as.
-  --jobFile        Upstart file to create (default /etc/init/<name>.conf)
-  --cwd            Directory to run the service from.
-  --upstart        Version of Upstart to assume: 0.6 or 1.4 (default)
+  --name NAME      Name to use for service (default derived from app)
+  --user USER      User to run service as.
+  --group GROUP    Group to run service as.
+  --jobFile PATH   Upstart file to create (default /etc/init/<name>.conf)
+  --cwd PATH       Directory to run the service from.
+  --upstart [VER]  Generate Upstart job for VER: 0.6 or 1.4 (default)
+  --systemd        Generate systemd service
 ```

@@ -26,10 +26,11 @@ function usage($0, p) {
   p('');
   p('Options:');
   p('  -h,--help        Print this message and exit.');
-  p('  --name           Name to use for service (default derived from app)')
-  p('  --user           User to run service as.');
-  p('  --group          Group to run service as.');
-  p('  --jobFile        Upstart file to create (default /etc/init/<name>.conf)');
-  p('  --cwd            Directory to run the service from.');
-  p('  --upstart        Version of Upstart to assume: 0.6 or 1.4 (default)');
+  p('  --name NAME      Name to use for service (default derived from app)')
+  p('  --user USER      User to run service as.');
+  p('  --group GROUP    Group to run service as.');
+  p('  --jobFile PATH   Upstart file to create (default /etc/init/<name>.conf)');
+  p('  --cwd PATH       Directory to run the service from.');
+  p('  --upstart [VER]  Generate Upstart job for VER: 0.6 or 1.4 (default)');
+  p('  --systemd        Generate systemd service');
 }
