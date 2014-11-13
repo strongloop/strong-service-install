@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 
 var upstartMaker = require('strong-service-upstart');
+var systemdMaker = require('strong-service-systemd');
 var uidNumber = require('uid-number');
 var mkdirp = require('mkdirp');
 var debug = require('debug')('strong-service-installer');
@@ -67,6 +68,11 @@ function optionsPrecheck(opts, next) {
   }
 
   // TODO: select sub-installer here when there's more than just Upstart
+  if (opts.systemd) {
+    opts.generator = systemdMaker;
+  } else {
+    opts.generator = upstartMaker;
+  }
   if (opts.upstart) {
     opts.version = opts.upstart;
     delete opts.upstart;
@@ -133,7 +139,13 @@ function normalizeOptions(opts, next) {
   }
 
   if (!opts.jobFile) {
-    opts.jobFile = '/etc/init/' + opts.name + '.conf';
+    if (opts.generator === systemdMaker) {
+      opts.jobFile = '/etc/systemd/system/' + opts.name + '.service';
+    } else if (opts.generator === upstartMaker) {
+      opts.jobFile = '/etc/init/' + opts.name + '.conf';
+    } else {
+      return next(new Error('Unknown init type, no path given'));
+    }
   }
 
   // ensure absolute path
@@ -160,7 +172,7 @@ function checkExistingJob(opts, next) {
 }
 
 function generateJob(opts, next) {
-  upstartMaker(opts, function(err, job) {
+  opts.generator(opts, function(err, job) {
     if (!err)
       opts.generatedJob = job;
     next(err);
