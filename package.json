@@ -1,6 +1,6 @@
 {
   "name": "strong-service-install",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Install a module as an OS service",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "debug": "^1.0.4",
+    "debug": "^2.0.0",
     "minimist": "^0.2.0",
     "mkdirp": "^0.5.0",
     "shell-quote": "^1.4.2",
