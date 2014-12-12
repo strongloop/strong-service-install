@@ -1,4 +1,10 @@
-2014-11-13, Version 1.1.0
+2014-12-12, Version 1.1.1
+=========================
+
+ * package: use debug v2.x in all strongloop deps (Sam Roberts)
+
+
+2014-11-12, Version 1.1.0
 =========================
 
  * Add support for installing systemd services (Ryan Graham)
