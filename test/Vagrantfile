@@ -62,9 +62,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu.vm.network "forwarded_port", guest: 8888, host: 10001, auto_correct: true
   end
 
-  # Centos 6.5 for testing Upstart 0.6
+  # Centos 6 for testing Upstart 0.6
   config.vm.define "centos6" do |centos|
-    centos.vm.box = "box-cutter/centos65"
+    centos.vm.box = "chef/centos-6.6"
 
     # Install Upstart 0.6 job
     centos.vm.provision "shell", inline: $testUpstart, privileged: false, args: ["0.6"]
@@ -74,7 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
 
-  # Centos 7.0 for testing systemd
+  # Centos 7 for testing systemd
   config.vm.define "centos7" do |centos|
     centos.vm.box = "chef/centos-7.0"
 
