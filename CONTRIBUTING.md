@@ -14,7 +14,7 @@ Contributing to `strong-service-install` is easy. In a few simple steps:
   * Adhere to code style outlined in the [Google C++ Style Guide][] and
     [Google Javascript Style Guide][].
 
-  * Sign the [Contributor License Agreement](https://cla.strongloop.com/strongloop/strong-service-install)
+  * Sign the [Contributor License Agreement](https://cla.strongloop.com/agreements/strongloop/strong-service-install)
 
   * Submit a pull request through Github.
 

@@ -26,21 +26,21 @@ vagrant up --provision --parallel ubuntu centos6 centos7 >&2
 
 FAIL=0
 
-if curl -sI 'http://localhost:10001/foo/bar?baz=quux' >&2; then
+if curl -sI 'http://127.0.0.1:10001/foo/bar?baz=quux' >&2; then
   echo 'ok # Upstart 1.4 on Ubuntu 12.04'
 else
   echo 'not ok # Upstart 1.4 on Ubuntu 12.04 failed'
   export FAIL=1
 fi
 
-if curl -sI 'http://localhost:10002/foo/bar?baz=quux' >&2; then
+if curl -sI 'http://127.0.0.1:10002/foo/bar?baz=quux' >&2; then
   echo 'ok # Upstart 0.6 on CentOS 6.5'
 else
   echo 'not ok # Upstart 0.6 on CentOS 6 failed'
   export FAIL=1
 fi
 
-if curl -sI 'http://localhost:10003/foo/bar?baz=quux' >&2; then
+if curl -sI 'http://127.0.0.1:10003/foo/bar?baz=quux' >&2; then
   echo 'ok # systemd on CentOS 7'
 else
   echo 'not ok # systemd on CentOS 7 failed'

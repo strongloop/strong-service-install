@@ -1,3 +1,13 @@
+2015-01-13, Version 1.1.2
+=========================
+
+ * Fix bad CLA URL in CONTRIBUTING.md (Ryan Graham)
+
+ * test: update boxes for Vagrant based tests (Ryan Graham)
+
+ * test: use 127.0.0.1 instead of localhost (Ryan Graham)
+
+
 2014-12-12, Version 1.1.1
 =========================
 
@@ -34,7 +44,7 @@
  * Don't fail on --dry-run (Ryan Graham)
 
 
-2014-07-21, Version 0.1.1
+2014-07-21, Version 0.1.2
 =========================
 
  * fix: log when/what service is installed (Ryan Graham)
@@ -47,7 +57,7 @@
 
 
 
-2014-07-21, Version 0.1.2
+2014-07-21, Version 0.1.1
 =========================
 
  * First release!
