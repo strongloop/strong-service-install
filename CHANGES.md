@@ -1,4 +1,10 @@
-2015-01-13, Version 1.1.2
+2015-06-03, Version 1.1.3
+=========================
+
+ * test: use official tap (Ryan Graham)
+
+
+2015-01-12, Version 1.1.2
 =========================
 
  * Fix bad CLA URL in CONTRIBUTING.md (Ryan Graham)
@@ -47,17 +53,17 @@
 2014-07-21, Version 0.1.2
 =========================
 
+
+
+2014-07-21, Version 0.1.1
+=========================
+
  * fix: log when/what service is installed (Ryan Graham)
 
  * fix: skip notice when no directory is created (Ryan Graham)
 
 
 2014-07-21, Version 0.1.0
-=========================
-
-
-
-2014-07-21, Version 0.1.1
 =========================
 
  * First release!
