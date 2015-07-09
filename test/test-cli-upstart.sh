@@ -1,13 +1,19 @@
 #!/bin/bash
 
-CMD="node ../bin/sl-svc-install.js"
+cd $(dirname "${BASH_SOURCE[0]}")
+source common.sh
 
-. common.sh
+# Setup
+CMD="node ../bin/sl-svc-install.js"
+TMP=`mktemp -d -t sl-svc-installXXXXXX`
+CURRENT_USER=`id -un`
+CURRENT_GROUP=`id -gn`
+comment "using tmpdir: $TMP"
+
+export SL_INSTALL_IGNORE_PLATFORM=true
 
 # command given, name should be derived, should exit cleanly
 assert_exit 0 $CMD --dry-run -- ../bin/sl-svc-install.js
-
-TMP=`mktemp -d -t sl-svc-installXXXXXX`
 assert_exit 1 test -d $TMP/etc/init
 assert_exit 1 test -d $TMP/home
 assert_exit 0 $CMD --cwd $TMP/home --jobFile $TMP/etc/init/test.conf -- test
