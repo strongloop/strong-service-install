@@ -1,6 +1,6 @@
 {
   "name": "strong-service-install",
-  "version": "1.1.3",
+  "version": "2.0.0-0",
   "description": "Install a module as an OS service",
   "main": "index.js",
   "scripts": {
@@ -32,14 +32,17 @@
     "tap": "^1.3.0"
   },
   "dependencies": {
-    "async": "^0.9.0",
+    "async": "^1.0.0",
+    "chownr": "0.0.2",
     "debug": "^2.0.0",
-    "minimist": "^0.2.0",
-    "mkdirp": "^0.5.0",
+    "lodash": "^3.10.0",
+    "minimist": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "passwd-user": "^1.2.0",
     "shell-quote": "^1.4.2",
     "strong-service-systemd": "^1.0.0",
     "strong-service-upstart": "^1.0.0",
-    "uid-number": "0.0.5",
+    "uid-number": "^0.0.5",
     "which": "^1.0.5"
   },
   "bin": {
