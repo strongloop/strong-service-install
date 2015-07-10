@@ -5,14 +5,18 @@ var install = require('../');
 
 var opts = minimist(process.argv.slice(2));
 
-if (!opts.command) {
-  if (opts._.length > 0)
-    opts.command = opts._;
-  delete opts._;
+if (!opts.command && opts._.length > 0) {
+  opts.command = opts._;
+}
+delete opts._;
+
+if (opts.help || opts.h) {
+  return usage(process.argv[1], console.log.bind(console));
 }
 
-if (opts.help || opts.h)
-  return usage(process.argv[1], console.log.bind(console));
+if (opts.version || opts.v) {
+  return console.log(require('../package.json').version);
+}
 
 install(opts, function(err, result) {
   if (err) {
