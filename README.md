@@ -2,8 +2,9 @@
 
 Create/install system service for a given app.
 
-Currently only supports Upstart, via
-[strong-service-upstart](https://github.com/strongloop/strong-service-upstart).
+Currently only supports Upstart ([strong-service-upstart](https://github.com/strongloop/strong-service-upstart))
+and systemd
+([strong-service-systemd](https://github.com/strongloop/strong-service-systemd)).
 
 ## Installation
 
