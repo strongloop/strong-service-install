@@ -5,3 +5,4 @@ node_modules
 test/loopback-example-app
 coverage
 .nyc_output
+*.tap
