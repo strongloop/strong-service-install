@@ -3,8 +3,8 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-$pkg_name = ENV['PKG_NAME'] || 'strong-service-install-1.0.0.tgz'
-$node_tgz = ENV['NODE_TGZ'] || 'node-v0.10.33-linux-x64.tar.gz'
+$pkg_name = ENV['PKG_NAME'] || Dir['*.tgz'].first
+$node_tgz = ENV['NODE_TGZ'] || Dir['*-linux-x64.tar.gz'].first
 
 $install_node = <<-SCRIPT
   which node && exit
@@ -53,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Ubuntu 12.04 for testing Upstart 1.4
   config.vm.define "ubuntu" do |ubuntu|
-    ubuntu.vm.box = "ubuntu/precise64"
+    ubuntu.vm.box = "ubuntu/trusty64"
 
     # Install Upstart 1.4 job
     ubuntu.vm.provision "shell", inline: $testUpstart, privileged: false, args: ["1.4"]
