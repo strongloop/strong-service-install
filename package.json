@@ -38,7 +38,6 @@
     "lodash": "^3.10.0",
     "minimist": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "passwd-user": "^1.2.0",
     "shell-quote": "^1.4.2",
     "strong-service-systemd": "^1.0.0",
     "strong-service-upstart": "^1.0.0",
