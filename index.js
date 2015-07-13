@@ -31,7 +31,6 @@ function install(opts, cb) {
     resolveCommand,
     normalizeOptions,
     checkExistingJob,
-    generateJob,
     ensureJobFileDir,
     ifUser(ensureUser),
     ifUser(fillInGroup),
@@ -41,6 +40,7 @@ function install(opts, cb) {
     ensureDirectories,
     ifUser(ensureOwnership),
     opts.preWrite || noop,
+    generateJob,
     writeJob,
   ].map(logCall);
   async.applyEachSeries(steps, opts, function(err) {
