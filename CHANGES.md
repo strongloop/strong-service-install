@@ -1,3 +1,31 @@
+2015-07-13, Version 2.0.0
+=========================
+
+ * move chown phase to after preWrite hook (Ryan Graham)
+
+ * fix HOME env not being set (Ryan Graham)
+
+ * don't provide default userGroup until it is known (Ryan Graham)
+
+ * generate job file just before writing it (Ryan Graham)
+
+ * package: bump prerelease (Ryan Graham)
+
+ * replace passwd-user dependency (Ryan Graham)
+
+ * autocreate users and paths as needed (Ryan Graham)
+
+ * fix minor lint errors and add systemd to readme (Ryan Graham)
+
+ * lint: add eslint and jscs (Ryan Graham)
+
+ * test: cleanup vagrant tests (Ryan Graham)
+
+ * cli: cleanup -h/--help and add -v/--version (Ryan Graham)
+
+ * test: upgrade to tap@1, add coverage (Ryan Graham)
+
+
 2015-06-03, Version 1.1.3
 =========================
 
