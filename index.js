@@ -366,7 +366,7 @@ function fillInHome(opts, callback) {
       install.error('Could not determine $HOME of \'%s\':',
                     opts.user, err.message);
     }
-    if (err && !opts.dryRun) {
+    if (!err) {
       opts.env = opts.env || {};
       opts.env.HOME = user && user.homedir || process.env.HOME;
       opts.cwd = opts.cwd || opts.env.HOME;
