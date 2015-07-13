@@ -38,8 +38,8 @@ function install(opts, cb) {
     ifUser(ensureGroup),
     ifUser(resolveIds),
     ensureDirectories,
-    ifUser(ensureOwnership),
     opts.preWrite || noop,
+    ifUser(ensureOwnership),
     generateJob,
     writeJob,
   ].map(logCall);
