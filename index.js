@@ -31,7 +31,6 @@ function install(opts, cb) {
     resolveCommand,
     normalizeOptions,
     checkExistingJob,
-    generateJob,
     ensureJobFileDir,
     ifUser(ensureUser),
     ifUser(fillInGroup),
@@ -41,6 +40,7 @@ function install(opts, cb) {
     ensureDirectories,
     ifUser(ensureOwnership),
     opts.preWrite || noop,
+    generateJob,
     writeJob,
   ].map(logCall);
   async.applyEachSeries(steps, opts, function(err) {
@@ -192,8 +192,6 @@ function normalizeOptions(opts, next) {
   }
 
   opts.user = opts.user || 'nobody';
-  // opts.group = opts.group || 'nobody';
-  opts.userGroup = opts.userGroup || opts.group;
   opts.groups = [].concat(opts.groups);
 
   if (!opts.dirs) {
@@ -368,7 +366,7 @@ function fillInHome(opts, callback) {
       install.error('Could not determine $HOME of \'%s\':',
                     opts.user, err.message);
     }
-    if (err && !opts.dryRun) {
+    if (!err) {
       opts.env = opts.env || {};
       opts.env.HOME = user && user.homedir || process.env.HOME;
       opts.cwd = opts.cwd || opts.env.HOME;
