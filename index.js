@@ -370,7 +370,7 @@ function fillInHome(opts, callback) {
       opts.env = opts.env || {};
       opts.env.HOME = user && user.homedir || process.env.HOME;
       opts.cwd = opts.cwd || opts.env.HOME;
-      // opts.dirs.push(opts.cwd);
+      opts.dirs.push(opts.cwd);
     }
     if (opts.dryRun) {
       err = null;
