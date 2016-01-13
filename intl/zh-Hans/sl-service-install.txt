@@ -1,0 +1,1 @@
+使用：{0}[选择余地〕{{-- <app and args>}选择余地：  {{-h,--help}以加印这信息和从出去。{{--name NAME}名字，为为所作  的服务(从 app）得到未履行的同样地使用{{--user USER}用户运作  为所作的服务。同样地运作为所作的服务的{{--group GROUP}组。  {{--jobFile PATH}关于的文件，建立（缺省的{{/etc/init/<name>.conf}）{{--cwd PATH}目录从运作  为所作的服务。{{--upstart [VER]}为 VER 产生暴发的工作：0.6或者  1.4（缺省的）{{--systemd}产生{{systemd}为所作的服务

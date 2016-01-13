@@ -36,6 +36,7 @@
     "minimist": "^1.0.0",
     "mkdirp": "^0.5.1",
     "shell-quote": "^1.4.2",
+    "strong-globalize": "^1.0.0",
     "strong-service-systemd": "^1.0.0",
     "strong-service-upstart": "^1.0.0",
     "uid-number": "^0.0.5",

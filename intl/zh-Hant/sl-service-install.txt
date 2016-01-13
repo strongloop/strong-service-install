@@ -1,0 +1,1 @@
+使用：{0}[選擇餘地〕{{-- <app and args>}選擇餘地：  {{-h,--help}以加印這訊息和從出去。{{--name NAME}名字，以為所作  的服務(從 app）得到未履行的的代價同樣地使用{{--user USER}用  戶運作為所作的服務。同樣地運作為所作的服務的{{--group GROUP}集  團。{{--jobFile PATH}關於的檔案，建立（預設的{{/etc/init/<name>.conf}）{{--cwd PATH}目錄從  運作為所作的服務。{{--upstart [VER]}為 VER 產生暴發的工作：0.6或  者1.4（預設的）{{--systemd}產生{{systemd}為所作的服務

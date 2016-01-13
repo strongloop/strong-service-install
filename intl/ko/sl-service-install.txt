@@ -1,0 +1,1 @@
+사용: {0}[옵션]{{-- <app and args>} 옵션:   {{-h,--help}이 이 메시지를 인쇄하고 퇴장한다. 서비스를   달리기 위해 {{--user USER} 사용자를 서비스(app에서 유래한   채무 불이행)에 쓸 {{--name NAME} 이름. 서비스를 달릴 {{--group GROUP}   그룹. 디폴트 {{/etc/init/<name>.conf} {{--cwd PATH} 디렉토리를 서비스를 달리도  록 만들 {{--jobFile PATH} 파일. {{--upstart [VER]}은 VER을 위해 벼락부자 같  은 일을 만들어 낸다: 디폴트 0.6이나 1.4 {{--systemd}은   {{systemd} 서비스를 만들어 낸다.
