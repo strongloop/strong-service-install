@@ -188,7 +188,7 @@ function normalizeOptions(opts, next) {
     } else if (opts.generator === upstartMaker) {
       opts.jobFile = '/etc/init/' + opts.name + '.conf';
     } else {
-      return next(new Error(g.t('Unknown init type, no path given')));
+      return next(g.Error('Unknown init type, no path given'));
     }
   }
 
