@@ -7,5 +7,5 @@ Options:
   {{--group GROUP}}   Group to run service as.
   {{--jobFile PATH}}  File to create (default {{/etc/init/<name>.conf}})
   {{--cwd PATH}}      Directory to run the service from.
-  {{--upstart [VER]}} Generate Upstart job for VER: 0.6 or 1.4 (default)
+  {{--upstart [VER]}} Generate {{Upstart}} job for VER: 0.6 or 1.4 (default)
   {{--systemd}}       Generate {{systemd}} service

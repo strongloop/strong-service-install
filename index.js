@@ -91,7 +91,7 @@ function optionsPrecheck(opts, next) {
   }
 
   if (install.platform !== 'linux') {
-    install.error(g.t('%s: only Upstart on Linux is supported',
+    install.error(g.t('%s: only {{Upstart}} on Linux is supported',
                   install.ignorePlatform ? g.t('Warning') : g.t('Error')));
     if (!install.ignorePlatform)
       errors.push(g.t('Unsupported platform'));
@@ -101,15 +101,17 @@ function optionsPrecheck(opts, next) {
     opts.upstart = '1.4'; // default
   } else if (opts.systemd && opts.upstart) {
     install.error(g.t(
-      'Invalid usage (cannot specify both --systemd and --upstart)' +
+      'Invalid usage (cannot specify both {{--systemd}} and {{--upstart}})' +
       ', see `%s --help`', install.$0));
-    errors.push(g.t('Cannot specify both systemd and Upstart'));
+    errors.push(g.t('Cannot specify both {{systemd}} and {{Upstart}}'));
   }
   opts.upstart = String(opts.upstart);
   if (!opts.systemd && opts.upstart !== '0.6' && opts.upstart !== '1.4') {
-    install.error(g.t('Invalid usage (only upstart "0.6" and "1.4" supported)' +
-                  ', see `%s --help`', install.$0));
-    errors.push(g.t('Invalid upstart target (only 0.6 and 1.4 are supported)'));
+    install.error(
+      g.t('Invalid usage (only {{upstart}} "0.6" and "1.4" supported)' +
+                  ', see `{{%s --help}}`', install.$0));
+    errors.push(
+      g.t('Invalid {{upstart}} target (only 0.6 and 1.4 are supported)'));
   }
 
   if (opts.systemd) {
@@ -366,7 +368,7 @@ function addUserToGroup(user, group, callback) {
 function fillInHome(opts, callback) {
   return opts.passwd(opts.user, function(err, user) {
     if (err) {
-      install.error(g.t('Could not determine $HOME of \'%s\':',
+      install.error(g.t('Could not determine {{$HOME}} of \'%s\':',
                     opts.user, err.message));
     }
     if (!err) {
