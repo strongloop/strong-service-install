@@ -1,3 +1,11 @@
+2016-04-11, Version 2.0.2
+=========================
+
+ * ensure user HOME directory exists (Ryan Graham)
+
+ * Refer to licenses with a link (Sam Roberts)
+
+
 2015-10-01, Version 2.0.1
 =========================
 
