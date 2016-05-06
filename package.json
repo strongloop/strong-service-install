@@ -1,6 +1,6 @@
 {
   "name": "strong-service-install",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Install a module as an OS service",
   "main": "index.js",
   "scripts": {
