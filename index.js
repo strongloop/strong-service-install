@@ -12,6 +12,7 @@ var chownr = require('chownr');
 var debug = require('debug')('strong-service-installer');
 var fmt = require('util').format;
 var fs = require('fs');
+var g = require('strong-globalize');
 var mkdirp = require('mkdirp');
 var passwd = require('./lib/passwd');
 var path = require('path');
@@ -51,7 +52,7 @@ function install(opts, cb) {
   async.applyEachSeries(steps, opts, function(err) {
     if (err)
       return cb(err);
-    install.log('Service %s installed (%s)', opts.name, opts.jobFile);
+    install.log(g.t('Service %s installed (%s)', opts.name, opts.jobFile));
     cb(null, fmt('%s (%s)', opts.name, opts.jobFile));
   });
 
@@ -91,29 +92,31 @@ function optionsPrecheck(opts, next) {
   var errors = [];
 
   if (!opts.command && !opts.name) {
-    errors.push('Missing command or name');
+    errors.push(g.t('Missing command or name'));
   }
 
   if (install.platform !== 'linux') {
-    install.error('%s: only Upstart on Linux is supported',
-                  install.ignorePlatform ? 'Warning' : 'Error');
+    install.error(g.t('%s: only {{Upstart}} on Linux is supported',
+                  install.ignorePlatform ? g.t('Warning') : g.t('Error')));
     if (!install.ignorePlatform)
-      errors.push('Unsupported platform');
+      errors.push(g.t('Unsupported platform'));
   }
 
   if (!opts.systemd && !opts.upstart) {
     opts.upstart = '1.4'; // default
   } else if (opts.systemd && opts.upstart) {
-    install.error(
-      'Invalid usage (cannot specify both --systemd and --upstart)' +
-      ', see `%s --help`', install.$0);
-    errors.push('Cannot specify both systemd and Upstart');
+    install.error(g.t(
+      'Invalid usage (cannot specify both {{--systemd}} and {{--upstart}})' +
+      ', see `%s --help`', install.$0));
+    errors.push(g.t('Cannot specify both {{systemd}} and {{Upstart}}'));
   }
   opts.upstart = String(opts.upstart);
   if (!opts.systemd && opts.upstart !== '0.6' && opts.upstart !== '1.4') {
-    install.error('Invalid usage (only upstart "0.6" and "1.4" supported)' +
-                  ', see `%s --help`', install.$0);
-    errors.push('Invalid upstart target (only 0.6 and 1.4 are supported)');
+    install.error(
+      g.t('Invalid usage (only {{upstart}} "0.6" and "1.4" supported)' +
+                  ', see `{{%s --help}}`', install.$0));
+    errors.push(
+      g.t('Invalid {{upstart}} target (only 0.6 and 1.4 are supported)'));
   }
 
   if (opts.systemd) {
@@ -192,7 +195,7 @@ function normalizeOptions(opts, next) {
     } else if (opts.generator === upstartMaker) {
       opts.jobFile = '/etc/init/' + opts.name + '.conf';
     } else {
-      return next(new Error('Unknown init type, no path given'));
+      return next(g.Error('Unknown init type, no path given'));
     }
   }
 
@@ -218,13 +221,14 @@ function checkExistingJob(opts, next) {
   fs.exists(opts.jobFile, function(exists) {
     if (exists) {
       if (opts.force) {
-        install.log('Warning: overwriting file "%s"', opts.jobFile);
+        install.log(g.t('Warning: overwriting file "%s"', opts.jobFile));
       } else if (opts.dryRun) {
-        install.log('Warning: install would fail because %j already exists',
-                    opts.jobFile);
+        install.log(g.t('Warning: install would fail because %j already exists',
+                    opts.jobFile));
       } else {
-        var message = fmt('File "%s" exists. Remove it or re-run with --force',
-                          opts.jobFile);
+        var message = g.format(
+          'File "%s" exists. Remove it or re-run with --force',
+          opts.jobFile);
         return next(Error(message));
       }
     }
@@ -244,7 +248,7 @@ function ensureJobFileDir(opts, cb) {
   var dir = path.dirname(opts.jobFile);
   opts.mkdirp(dir, {}, function(err, made) {
     if (!err && made)
-      install.log('created %s...', made);
+      install.log(g.t('created %s...', made));
     cb(err);
   });
 }
@@ -254,11 +258,11 @@ function ensureUser(opts, callback) {
     if (err || exists)
       return callback(err);
     if (opts.dryRun) {
-      install.log('skipping user creation in dry-run');
+      install.log(g.t('skipping user creation in dry-run'));
       return callback();
     }
     if (install.platform !== 'linux') {
-      install.log('skipping user creation on non-Linux platform');
+      install.log(g.t('skipping user creation on non-Linux platform'));
       return callback();
     }
     opts.home = '/var/lib/' + opts.user;
@@ -281,8 +285,8 @@ function useradd(name, home, groups, callback) {
   args.push(name);
   child_process.execFile(cmd, args, function(err, stdout, stderr) {
     if (err) {
-      install.error('Error adding user %s:\n%s\n%s',
-                    name, stdout, stderr);
+      install.error(g.t('Error adding user %s:\n%s\n%s',
+                    name, stdout, stderr));
     }
     callback(err);
   });
@@ -304,8 +308,8 @@ function fillInGroup(opts, callback) {
   }
   child_process.execFile(cmd, args, function(err, stdout) {
     if (err) {
-      install.error('Could not determine group for service user \'%s\': %s',
-                    opts.user, err.message);
+      install.error(g.t('Could not determine group for service user \'%s\': %s',
+                    opts.user, err.message));
     } else {
       opts.userGroup = stdout.trim();
       opts.group = opts.group || opts.userGroup;
@@ -323,11 +327,11 @@ function ensureGroup(opts, callback) {
       return callback(err);
     }
     if (opts.dryRun) {
-      install.log('skipping user modification in dry-run');
+      install.log(g.t('skipping user modification in dry-run'));
       return callback();
     }
     if (install.platform !== 'linux') {
-      install.log('skipping user modification on non-Linux platform');
+      install.log(g.t('skipping user modification on non-Linux platform'));
       return callback();
     }
     addUserToGroup(opts.user, opts.group, callback);
@@ -340,8 +344,9 @@ function userInRequiredGroup(user, group, callback) {
   child_process.execFile(cmd, args, function(err, stdout) {
     var groups = [];
     if (err) {
-      install.error('Could not determine groups for service user \'%s\': %s',
-                    user, err.message);
+      install.error(
+        g.t('Could not determine groups for service user \'%s\': %s',
+        user, err.message));
     } else {
       groups = stdout.trim().split(/\s+/);
     }
@@ -358,8 +363,8 @@ function addUserToGroup(user, group, callback) {
   ];
   child_process.execFile(cmd, args, function(err, stdout, stderr) {
     if (err) {
-      install.error('Error adding user %s to group %s:\n%s\n%s',
-                    user, group, stdout, stderr);
+      install.error(g.t('Error adding user %s to group %s:\n%s\n%s',
+                    user, group, stdout, stderr));
     }
     callback(err);
   });
@@ -368,8 +373,8 @@ function addUserToGroup(user, group, callback) {
 function fillInHome(opts, callback) {
   return opts.passwd(opts.user, function(err, user) {
     if (err) {
-      install.error('Could not determine $HOME of \'%s\':',
-                    opts.user, err.message);
+      install.error(g.t('Could not determine {{$HOME}} of \'%s\':',
+                    opts.user, err.message));
     }
     if (!err) {
       opts.env = opts.env || {};
@@ -386,13 +391,13 @@ function fillInHome(opts, callback) {
 
 function resolveIds(opts, callback) {
   if (opts.dryRun) {
-    install.log('skipping uid resolution in dry-run');
+    install.log(g.t('skipping uid resolution in dry-run'));
     return setImmediate(callback);
   }
   uidNumber(opts.user, opts.userGroup, function(err, uid, gid) {
     if (err) {
-      install.error('Error getting numeric uid/gid of %s/%s: %s',
-                    opts.user, opts.userGroup, err.message);
+      install.error(g.t('Error getting numeric uid/gid of %s/%s: %s',
+                    opts.user, opts.userGroup, err.message));
       return callback(err);
     }
     opts._userId = uid;
@@ -410,7 +415,7 @@ function ensureDirectories(opts, cb) {
     }
     opts.mkdirp(dir, {}, function(err, made) {
       if (!err && made) {
-        install.log('created %s...', made);
+        install.log(g.t('created %s...', made));
         uidNumber(opts.user, opts.group, function(err, uid, gid) {
           if (err)
             return next(err);

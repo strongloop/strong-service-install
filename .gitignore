@@ -6,3 +6,15 @@ test/loopback-example-app
 coverage
 .nyc_output
 *.tap
+intl/MSG.json
+intl/de
+intl/es
+intl/fr
+intl/it
+intl/ja
+intl/ko
+intl/pt
+intl/ru
+intl/zh-Hans
+intl/zh-Hant
+intl/en/*.json
