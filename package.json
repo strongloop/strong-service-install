@@ -32,7 +32,7 @@
     "async": "^1.0.0",
     "chownr": "0.0.2",
     "debug": "^2.0.0",
-    "lodash": "^3.10.0",
+    "lodash": "^4.17.5",
     "minimist": "^1.0.0",
     "mkdirp": "^0.5.1",
     "shell-quote": "^1.4.2",
