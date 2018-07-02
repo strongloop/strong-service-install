@@ -6,7 +6,9 @@
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore ./ && jscs ./",
     "test": "tap --coverage --coverage-report=cobertura --timeout=200 test/test-*",
-    "posttest": "nyc report --reporter=lcov && nyc report"
+    "posttest": "nyc report --reporter=lcov && nyc report",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -32,19 +34,21 @@
     "async": "^1.0.0",
     "chownr": "0.0.2",
     "debug": "^2.0.0",
-    "lodash": "^3.10.0",
+    "lodash": "^4.17.5",
     "minimist": "^1.0.0",
     "mkdirp": "^0.5.1",
     "shell-quote": "^1.4.2",
     "strong-service-systemd": "^1.0.0",
     "strong-service-upstart": "^1.0.0",
     "uid-number": "^0.0.5",
-    "which": "^1.0.5"
+    "which": "^1.0.5",
+    "snyk": "^1.88.0"
   },
   "bin": {
     "sl-svc-install": "bin/sl-svc-install.js"
   },
   "directories": {
     "test": "test"
-  }
+  },
+  "snyk": true
 }
